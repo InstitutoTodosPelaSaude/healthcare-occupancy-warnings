@@ -109,11 +109,16 @@ A few notes on the shipped files:
 
 ## Reproducibility notes
 
-- LISA p-values come from conditional randomisation. `08_spatial_associations.py`
-  fixes the random seed so the step is deterministic. The p-values published in
-  Table S4 came from an unseeded run, so they differ in the third decimal;
-  cluster assignments and significance calls are unaffected.
-- All other steps are deterministic and reproduce the published tables exactly.
+- Every numeric output is deterministic and reproduces the published values,
+  with one exception: LISA p-values come from conditional randomisation.
+  `08_spatial_associations.py` fixes the random seed so the step is repeatable,
+  but the p-values published in Table S4 came from an unseeded run and differ in
+  the third decimal. Cluster assignments, significance calls and every other
+  column are unaffected.
+- PNG outputs are byte-reproducible on a given environment. SVG and HTML are
+  not: matplotlib embeds generated element IDs in SVG, and folium assigns a
+  random map identifier on every run. Compare those by content, not by
+  checksum.
 
 ## Citation
 
