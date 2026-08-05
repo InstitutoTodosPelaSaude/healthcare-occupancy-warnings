@@ -1,14 +1,31 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the associated manuscript."
+message: "If you use this code or data, please cite it as below."
 title: "Healthcare occupancy data as an early warning indicator of infectious disease surges in the São Paulo metropolitan area, Brazil"
 abstract: >-
-  Code and data to reproduce the analyses of hourly occupancy data from 17
-  public urgent care units in the São Paulo metropolitan area, compared with
-  laboratory-confirmed surveillance data for SARS-CoV-2, dengue virus and
-  respiratory viruses, using dynamic time warping, Granger causality testing,
-  a z-based epidemic volatility index and spatial association analysis.
-type: software
-repository-code: "https://github.com/InstitutoTodosPelaSaude/paper_occupancy_data"
+  Companion repository for the manuscript on healthcare occupancy as an early
+  warning signal for infectious disease surges. Contains hourly occupancy data
+  for 17 public urgent care units in the São Paulo metropolitan area
+  (15 July 2023 to 12 October 2024), weekly laboratory surveillance series for
+  SARS-CoV-2, dengue and respiratory viruses, and the Python pipeline that
+  reproduces every figure and supplementary table: dynamic time warping,
+  Granger causality testing, a z-based epidemic volatility index, early warning
+  lead time analysis, and LISA spatial association analysis.
+type: dataset
+version: 1.0.0
+repository-code: "https://github.com/InstitutoTodosPelaSaude/healthcare-occupancy-warnings"
+keywords:
+  - healthcare occupancy
+  - early warning
+  - syndromic surveillance
+  - infectious disease surges
+  - dynamic time warping
+  - Granger causality
+  - epidemic volatility index
+  - spatial autocorrelation
+  - SARS-CoV-2
+  - dengue
+  - respiratory viruses
+  - Brazil
 authors:
   - family-names: "Araújo"
     given-names: "Jose Deney"

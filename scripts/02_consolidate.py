@@ -39,32 +39,32 @@ occupancy_average = pd.read_csv(
 )
 
 # ------------------- Exploratory data: private laboratories -------------------
-radim_respat = pd.read_csv(
-    PRIVATE_LABS_DIR / 'radim_respat_posrate_SP_state.tsv', sep='\t', index_col=0
+private_respat = pd.read_csv(
+    PRIVATE_LABS_DIR / 'respat_posrate_SP_state.tsv', sep='\t', index_col=0
 )
-radim_respat_sc2 = radim_respat[radim_respat['virus'] == 'SC2']
+private_respat_sc2 = private_respat[private_respat['virus'] == 'SC2']
 
-radim_arbo = pd.read_csv(
-    PRIVATE_LABS_DIR / 'radim_arbo_posrate_SP_state.tsv', sep='\t', index_col=0
+private_arbo = pd.read_csv(
+    PRIVATE_LABS_DIR / 'arbo_posrate_SP_state.tsv', sep='\t', index_col=0
 )
-radim_arbo_denv = radim_arbo[radim_arbo['virus'] == 'DENV']
+private_arbo_denv = private_arbo[private_arbo['virus'] == 'DENV']
 
-radim_vrisp = pd.read_csv(
-    PRIVATE_LABS_DIR / 'radim_vrisp_posrate_SP_state.tsv', sep='\t', index_col=0
+private_vrisp = pd.read_csv(
+    PRIVATE_LABS_DIR / 'vrisp_posrate_SP_state.tsv', sep='\t', index_col=0
 )
 
 # ------------------- Validation data: public surveillance -------------------
 sivep_cases = pd.read_csv(PUBLIC_CASES_DIR / 'sivep_cases_SP_state.tsv', sep='\t')
-sivep_cases_sc2 = sivep_cases[sivep_cases['virus'] == 'covid']
-sivep_cases_sc2.index = sivep_cases_sc2['epiweek_end']
-sivep_cases_sc2 = sivep_cases_sc2[['result_count']]
-sivep_cases_sc2 = sivep_cases_sc2.groupby('epiweek_end', as_index=True).sum()
+validation_cases_sc2 = sivep_cases[sivep_cases['virus'] == 'covid']
+validation_cases_sc2.index = validation_cases_sc2['epiweek_end']
+validation_cases_sc2 = validation_cases_sc2[['result_count']]
+validation_cases_sc2 = validation_cases_sc2.groupby('epiweek_end', as_index=True).sum()
 
 infodengue_cases = pd.read_csv(
     PUBLIC_CASES_DIR / 'infodengue_cases_SP_state.tsv', sep='\t'
 )
-infodengue_cases_denv = infodengue_cases[infodengue_cases['disease'] == 'dengue']
-infodengue_cases_denv.index = infodengue_cases_denv['data_fimSE']
+validation_cases_denv = infodengue_cases[infodengue_cases['disease'] == 'dengue']
+validation_cases_denv.index = validation_cases_denv['data_fimSE']
 
 sivep_vrisp = pd.read_csv(
     PUBLIC_CASES_DIR / 'sivep_vrisp_cases_SP_state.tsv', sep='\t', index_col=0
@@ -84,18 +84,18 @@ consolidated['epidemiological_weeks'] = (
 
 # %%
 # Align every source on the same date string before joining
-for frame in (occupancy_average, radim_respat_sc2, radim_arbo_denv,
-              sivep_cases_sc2, infodengue_cases_denv, radim_vrisp, sivep_vrisp):
+for frame in (occupancy_average, private_respat_sc2, private_arbo_denv,
+              validation_cases_sc2, validation_cases_denv, private_vrisp, sivep_vrisp):
     frame.index = pd.to_datetime(frame.index).strftime('%Y-%m-%d')
 
 weeks = consolidated['epidemiological_weeks']
-consolidated['detecta_percentage_mean'] = weeks.map(occupancy_average['percentage_mean'])
-consolidated['radim_posrate_sc2'] = weeks.map(radim_respat_sc2['positivity_rate'])
-consolidated['sivep_cases_sc2'] = weeks.map(sivep_cases_sc2['result_count'])
-consolidated['radim_posrate_denv'] = weeks.map(radim_arbo_denv['positivity_rate'])
-consolidated['infodengue_cases_denv'] = weeks.map(infodengue_cases_denv['casos_estimados'])
-consolidated['radim_posrate_vrisp'] = weeks.map(radim_vrisp['positivity_rate'])
-consolidated['sivep_vrisp_cases'] = weeks.map(sivep_vrisp['positives'])
+consolidated['occupancy_percentage_mean'] = weeks.map(occupancy_average['percentage_mean'])
+consolidated['exploratory_posrate_sc2'] = weeks.map(private_respat_sc2['positivity_rate'])
+consolidated['validation_cases_sc2'] = weeks.map(validation_cases_sc2['result_count'])
+consolidated['exploratory_posrate_denv'] = weeks.map(private_arbo_denv['positivity_rate'])
+consolidated['validation_cases_denv'] = weeks.map(validation_cases_denv['casos_estimados'])
+consolidated['exploratory_posrate_vrisp'] = weeks.map(private_vrisp['positivity_rate'])
+consolidated['validation_vrisp_cases'] = weeks.map(sivep_vrisp['positives'])
 
 consolidated.to_csv(CONSOLIDATED_DATA, sep='\t', index=False)
 
@@ -107,12 +107,12 @@ consolidated['epidemiological_weeks'] = pd.to_datetime(
 )
 
 # Only occupancy is interpolated; case counts keep their gaps
-consolidated[['detecta_percentage_mean']] = (
-    consolidated[['detecta_percentage_mean']].interpolate()
+consolidated[['occupancy_percentage_mean']] = (
+    consolidated[['occupancy_percentage_mean']].interpolate()
 )
 
 # Min-max rescale the case counts so they are comparable with occupancy
-for col in ['sivep_cases_sc2', 'infodengue_cases_denv', 'sivep_vrisp_cases']:
+for col in ['validation_cases_sc2', 'validation_cases_denv', 'validation_vrisp_cases']:
     min_val = consolidated[col].min()
     max_val = consolidated[col].max()
     consolidated[f'{col}_norm'] = (

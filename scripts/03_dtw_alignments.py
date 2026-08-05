@@ -34,17 +34,17 @@ consolidated['epidemiological_weeks'] = pd.to_datetime(
     consolidated['epidemiological_weeks']
 )
 
-OCCUPANCY = 'detecta_percentage_mean'
+OCCUPANCY = 'occupancy_percentage_mean'
 
 # Panel order follows Figure 3: SARS-CoV-2 (A, B), DENV (C, D), RV (E, F),
 # alternating private positivity rate and public case counts.
 COMPARISONS = [
-    ('radim_posrate_sc2', 'SC2 positivity (%) - private labs'),
-    ('sivep_cases_sc2', 'SC2 cases (#) - SIVEP-SRAG'),
-    ('radim_posrate_denv', 'DENV positivity (%) - private labs'),
-    ('infodengue_cases_denv', 'DENV cases (#) - InfoDengue'),
-    ('radim_posrate_vrisp', 'RV positivity (%) - private labs'),
-    ('sivep_vrisp_cases_norm', 'RV cases (#) - SIVEP-SRAG'),
+    ('exploratory_posrate_sc2', 'SC2 positivity (%) - private labs'),
+    ('validation_cases_sc2', 'SC2 cases (#) - SIVEP-SRAG'),
+    ('exploratory_posrate_denv', 'DENV positivity (%) - private labs'),
+    ('validation_cases_denv', 'DENV cases (#) - InfoDengue'),
+    ('exploratory_posrate_vrisp', 'RV positivity (%) - private labs'),
+    ('validation_vrisp_cases_norm', 'RV cases (#) - SIVEP-SRAG'),
 ]
 
 targets = [name for name, _ in COMPARISONS] + [OCCUPANCY]

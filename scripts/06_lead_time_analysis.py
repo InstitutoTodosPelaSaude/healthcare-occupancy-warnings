@@ -5,7 +5,7 @@ For each epidemic wave, locates the first occupancy alert (weekly z-score
 above 0.65 on a 6-week rolling baseline) and the laboratory surge peak, then
 measures the lead time between them. Evaluation is restricted to
 pathogen-source combinations with significant Granger causality in that wave;
-the significance flags are read from the step 05 output rather than
+the significance flags are read from the step 04 output rather than
 hard-coded.
 
 Outputs
@@ -46,12 +46,12 @@ WAVES = units.LEAD_TIME_WAVES
 
 # internal key: (column, display label, source type, dataset role, group, colour)
 PATHOGENS = {
-    'SC2 (%)':  ('radim_posrate_sc2',     'SC2 (%)',  'private', 'exploratory', 'SC2',  '#2ECC71'),
-    'SC2 (#)':  ('sivep_cases_sc2',       'SC2 (#)',  'public',  'validation',  'SC2',  '#27AE60'),
-    'Denv (%)': ('radim_posrate_denv',    'Denv (%)', 'private', 'exploratory', 'Denv', '#9B59B6'),
-    'Denv (#)': ('infodengue_cases_denv', 'Denv (#)', 'public',  'validation',  'Denv', '#6C3483'),
-    'RV (%)':   ('radim_posrate_vrisp',   'RV (%)',   'private', 'exploratory', 'RV',   '#555555'),
-    'RV (#)':   ('sivep_vrisp_cases',     'RV (#)',   'public',  'validation',  'RV',   '#2d2d2d'),
+    'SC2 (%)':  ('exploratory_posrate_sc2',     'SC2 (%)',  'private', 'exploratory', 'SC2',  '#2ECC71'),
+    'SC2 (#)':  ('validation_cases_sc2',       'SC2 (#)',  'public',  'validation',  'SC2',  '#27AE60'),
+    'Denv (%)': ('exploratory_posrate_denv',    'Denv (%)', 'private', 'exploratory', 'Denv', '#9B59B6'),
+    'Denv (#)': ('validation_cases_denv', 'Denv (#)', 'public',  'validation',  'Denv', '#6C3483'),
+    'RV (%)':   ('exploratory_posrate_vrisp',   'RV (%)',   'private', 'exploratory', 'RV',   '#555555'),
+    'RV (#)':   ('validation_vrisp_cases',     'RV (#)',   'public',  'validation',  'RV',   '#2d2d2d'),
 }
 
 WAVE_COLORS = {'Wave 1': '#2E86AB', 'Wave 2': '#F18F01', 'Wave 3': '#C73E1D'}
@@ -69,7 +69,7 @@ def normalise(arr):
 
 
 # %%
-# ------------- Granger significance, derived from step 05 -------------
+# ------------- Granger significance, derived from step 04 -------------
 granger = pd.read_csv(GRANGER_DIR / "granger_results_by_wave.tsv", sep="\t")
 significant = granger[granger['p_value'] < 0.05]
 
@@ -91,21 +91,21 @@ for wave_index, wave_label in enumerate(WAVES, start=1):
 df = pd.read_csv(CONSOLIDATED_DATA, sep='\t')
 df['epidemiological_weeks'] = pd.to_datetime(df['epidemiological_weeks'])
 df = df.sort_values('epidemiological_weeks').reset_index(drop=True)
-df_occ = df.dropna(subset=['detecta_percentage_mean']).copy().reset_index(drop=True)
+df_occ = df.dropna(subset=['occupancy_percentage_mean']).copy().reset_index(drop=True)
 
-df_occ['occ_rolling_mean'] = df_occ['detecta_percentage_mean'].rolling(
+df_occ['occ_rolling_mean'] = df_occ['occupancy_percentage_mean'].rolling(
     window=OCC_WINDOW, min_periods=3).mean()
-df_occ['occ_rolling_std'] = df_occ['detecta_percentage_mean'].rolling(
+df_occ['occ_rolling_std'] = df_occ['occupancy_percentage_mean'].rolling(
     window=OCC_WINDOW, min_periods=3).std()
 df_occ['z_occupancy'] = (
-    (df_occ['detecta_percentage_mean'] - df_occ['occ_rolling_mean'])
+    (df_occ['occupancy_percentage_mean'] - df_occ['occ_rolling_mean'])
     / df_occ['occ_rolling_std']
 )
 df_occ['alert_fired'] = (df_occ['z_occupancy'] > THRESHOLD).astype(int)
 
 # %%
 # ------------- Weekly z-scores for every series (Table S5) -------------
-zscore_out = df_occ[['epidemiological_weeks', 'detecta_percentage_mean',
+zscore_out = df_occ[['epidemiological_weeks', 'occupancy_percentage_mean',
                      'occ_rolling_mean', 'occ_rolling_std',
                      'z_occupancy', 'alert_fired']].copy()
 
@@ -117,7 +117,7 @@ for key, (col, label, _source, _role, _group, _color) in PATHOGENS.items():
 
 zscore_out = zscore_out.rename(columns={
     'epidemiological_weeks': 'epi_week',
-    'detecta_percentage_mean': 'occupancy_%',
+    'occupancy_percentage_mean': 'occupancy_%',
     'occ_rolling_mean': 'occupancy_rolling_mean',
     'occ_rolling_std': 'occupancy_rolling_std',
     'z_occupancy': 'zscore_occupancy',

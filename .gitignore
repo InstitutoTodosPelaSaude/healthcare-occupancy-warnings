@@ -10,10 +10,6 @@ __pycache__/
 venv/
 env/
 
-# Large raw surveillance dumps: re-downloadable via scripts/02_public_surveillance_etl.py
-data/public_cases/*_all_data_*.csv
-data/public_cases/*.csv
-
 # Editor / OS
 .vscode/
 .idea/

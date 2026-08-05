@@ -23,7 +23,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src import detecta, plt_maps, units
+from src import occupancy, plt_maps, units
 from src.paths import (
     MUNICIPALITY_GEOJSON,
     OCCUPANCY_DIR,
@@ -40,28 +40,28 @@ VOLATILITY_WINDOW_DAYS = 42
 CITY_NAME = 'São Paulo metropolitan area'
 
 # %%
-merged_data, week_days = detecta.get_gold_standard_data(
+merged_data, week_days = occupancy.get_gold_standard_data(
     units.GOLD_STANDARD_LIST, units.DATES_TO_REMOVE, OCCUPANCY_DIR
 )
 merged_data = merged_data.interpolate(method='linear')
 
 # %%
-moving_stds, moving_average = detecta.moving_average_or_zscores(
+moving_stds, moving_average = occupancy.moving_average_or_zscores(
     merged_data, window=VOLATILITY_WINDOW_DAYS
 )
-merged_means_42 = detecta.concat_means(merged_data, moving_stds, moving_average)
-merged_data_weekly = detecta.get_weekly_data_from_daily(merged_means_42)
+merged_means_42 = occupancy.concat_means(merged_data, moving_stds, moving_average)
+merged_data_weekly = occupancy.get_weekly_data_from_daily(merged_means_42)
 
 # %%
 # Figure 4A: city-level occupancy, 42-day moving average and weekly z-scores
-detecta.viz_metrics_by_city_sns(
+occupancy.viz_metrics_by_city_sns(
     merged_data_weekly,
     city_name=CITY_NAME,
     output_file_name=str(OUTBREAKS_DIR / 'occupancy_average_sao_paulo'),
 )
 
 # %%
-metrics_by_unit = detecta.metrics_by_unit(merged_data, moving_average, moving_stds)
+metrics_by_unit = occupancy.metrics_by_unit(merged_data, moving_average, moving_stds)
 
 # Long-format export of the per-unit weekly z-scores
 zscore_rows = []
@@ -82,7 +82,7 @@ PERIODS = [
 ]
 
 for week, label, background_color in PERIODS:
-    detecta.plot_zscores_barplot_by_unit(
+    occupancy.plot_zscores_barplot_by_unit(
         metrics_by_unit,
         week_date=week,
         output_file_name=str(

@@ -1,7 +1,7 @@
 indicator	label	dtw_distance
-radim_posrate_sc2	SC2 positivity (%) - private labs	0.8918075478452873
-sivep_cases_sc2	SC2 cases (#) - SIVEP-SRAG	0.9962301461886772
-radim_posrate_denv	DENV positivity (%) - private labs	1.914769334144417
-infodengue_cases_denv	DENV cases (#) - InfoDengue	2.118508986192697
-radim_posrate_vrisp	RV positivity (%) - private labs	0.9674571527182206
-sivep_vrisp_cases_norm	RV cases (#) - SIVEP-SRAG	1.009310969581277
+exploratory_posrate_sc2	SC2 positivity (%) - private labs	0.8918075478452873
+validation_cases_sc2	SC2 cases (#) - SIVEP-SRAG	0.9962301461886772
+exploratory_posrate_denv	DENV positivity (%) - private labs	1.914769334144417
+validation_cases_denv	DENV cases (#) - InfoDengue	2.118508986192697
+exploratory_posrate_vrisp	RV positivity (%) - private labs	0.9674571527182206
+validation_vrisp_cases_norm	RV cases (#) - SIVEP-SRAG	1.009310969581277

@@ -25,14 +25,14 @@ from matplotlib.colors import LinearSegmentedColormap
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src import detecta, units
+from src import occupancy, units
 from src.paths import OCCUPANCY_DIR, UNIT_OVERVIEW_DIR, ensure_dir
 
 PATH_OUTPUT = UNIT_OVERVIEW_DIR
 ensure_dir(PATH_OUTPUT / "by_unit", PATH_OUTPUT / "plots")
 
 # %%
-merged_data, week_days = detecta.get_gold_standard_data(
+merged_data, week_days = occupancy.get_gold_standard_data(
     units.GOLD_STANDARD_LIST, units.DATES_TO_REMOVE, OCCUPANCY_DIR
 )
 # Single missing hourly records are filled linearly (Methods)
@@ -46,14 +46,14 @@ merged_data.to_csv(
 # Moving averages at four window lengths
 merged_means = {}
 for window in (7, 14, 21, 28):
-    moving_stds, moving_average = detecta.moving_average_or_zscores(
+    moving_stds, moving_average = occupancy.moving_average_or_zscores(
         merged_data, window=window
     )
-    merged_means[window] = detecta.concat_means(
+    merged_means[window] = occupancy.concat_means(
         merged_data, moving_stds, moving_average
     )
 
-detecta.plot_combined_data(
+occupancy.plot_combined_data(
     [merged_means[w] for w in (7, 14, 21, 28)],
     windows=[7, 14, 21, 28],
     path_output=PATH_OUTPUT,
@@ -65,12 +65,12 @@ detecta.plot_combined_data(
 
 # %%
 # Daily to weekly (epidemiological weeks, ending on Saturday)
-merged_data_weekly = detecta.get_weekly_data_from_daily(merged_data)
+merged_data_weekly = occupancy.get_weekly_data_from_daily(merged_data)
 merged_means_weekly = {
-    w: detecta.get_weekly_data_from_daily(merged_means[w]) for w in (7, 14, 21, 28)
+    w: occupancy.get_weekly_data_from_daily(merged_means[w]) for w in (7, 14, 21, 28)
 }
 
-detecta.plot_combined_test(
+occupancy.plot_combined_test(
     [merged_means_weekly[w] for w in (7, 14, 21, 28)],
     windows=[7, 14, 21, 28],
     path_output=PATH_OUTPUT,

@@ -1,11 +1,11 @@
 """The monitored unit panel: file list, excluded dates and name standardisation.
 
-Kept in one place because scripts 01, 06 and 10 all need the same 17 units
+Kept in one place because scripts 01, 05 and 09 all need the same 17 units
 and the same exclusion window.
 """
 
 # The 17 public urgent care units analysed in the manuscript.
-# Each entry is a file name under data/detecta/.
+# Each entry is a file name under data/occupancy/.
 GOLD_STANDARD_LIST = [
     'UPA Vila Assis.tsv',
     'UPA PEDREIRA - Dr. César Antunes da Rocha.tsv',
@@ -76,15 +76,15 @@ LEAD_TIME_WAVES = {
 }
 
 # Maps each Granger test target back to its pathogen group, so the
-# significance flags in Table S6 can be derived from the step 05 output
+# significance flags in Table S6 can be derived from the step 04 output
 # instead of being transcribed by hand.
 GRANGER_TARGET_TO_GROUP = {
-    'sivep_cases_sc2_norm': 'SC2',
-    'radim_posrate_sc2': 'SC2',
-    'infodengue_diff': 'Denv',
-    'radim_denv_diff': 'Denv',
-    'radim_posrate_vrisp': 'RV',
-    'sivep_vrisp_cases_norm': 'RV',
+    'validation_cases_sc2_norm': 'SC2',
+    'exploratory_posrate_sc2': 'SC2',
+    'validation_denv_diff': 'Denv',
+    'exploratory_denv_diff': 'Denv',
+    'exploratory_posrate_vrisp': 'RV',
+    'validation_vrisp_cases_norm': 'RV',
 }
 
 # Raw Google Maps establishment names mapped to the standardised names

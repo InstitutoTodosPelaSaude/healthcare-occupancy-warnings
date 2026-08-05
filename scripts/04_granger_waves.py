@@ -37,13 +37,13 @@ df['epidemiological_weeks'] = pd.to_datetime(df['epidemiological_weeks'])
 # %%
 # ------------------------- ADF stationarity test -------------------------
 adf_targets = [
-    'detecta_percentage_mean',
-    'sivep_cases_sc2_norm',
-    'infodengue_cases_denv_norm',
-    'radim_posrate_sc2',
-    'radim_posrate_denv',
-    'radim_posrate_vrisp',
-    'sivep_vrisp_cases_norm',
+    'occupancy_percentage_mean',
+    'validation_cases_sc2_norm',
+    'validation_cases_denv_norm',
+    'exploratory_posrate_sc2',
+    'exploratory_posrate_denv',
+    'exploratory_posrate_vrisp',
+    'validation_vrisp_cases_norm',
 ]
 
 adf_rows = []
@@ -63,18 +63,18 @@ print(adf_df.to_string(index=False))
 
 # %%
 # First-order differencing for the series that failed the ADF test
-df['detecta_diff'] = df['detecta_percentage_mean'].diff()
-df['infodengue_diff'] = df['infodengue_cases_denv_norm'].diff()
-df['radim_denv_diff'] = df['radim_posrate_denv'].diff()
+df['occupancy_diff'] = df['occupancy_percentage_mean'].diff()
+df['validation_denv_diff'] = df['validation_cases_denv_norm'].diff()
+df['exploratory_denv_diff'] = df['exploratory_posrate_denv'].diff()
 
 # Each laboratory indicator is tested against the differenced occupancy series
 GRANGER_PAIRS = {
-    'sivep_cases_sc2_norm': 'detecta_diff',
-    'radim_posrate_sc2': 'detecta_diff',
-    'infodengue_diff': 'detecta_diff',
-    'radim_denv_diff': 'detecta_diff',
-    'radim_posrate_vrisp': 'detecta_diff',
-    'sivep_vrisp_cases_norm': 'detecta_diff',
+    'validation_cases_sc2_norm': 'occupancy_diff',
+    'exploratory_posrate_sc2': 'occupancy_diff',
+    'validation_denv_diff': 'occupancy_diff',
+    'exploratory_denv_diff': 'occupancy_diff',
+    'exploratory_posrate_vrisp': 'occupancy_diff',
+    'validation_vrisp_cases_norm': 'occupancy_diff',
 }
 
 # Partially overlapping windows, offset to accommodate the pathogen-specific

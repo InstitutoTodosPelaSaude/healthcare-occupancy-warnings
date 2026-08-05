@@ -9,7 +9,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 DATA_DIR = REPO_ROOT / "data"
-OCCUPANCY_DIR = DATA_DIR / "detecta"
+OCCUPANCY_DIR = DATA_DIR / "occupancy"
 PRIVATE_LABS_DIR = DATA_DIR / "private_labs"
 PUBLIC_CASES_DIR = DATA_DIR / "public_cases"
 GEO_DIR = DATA_DIR / "geo"

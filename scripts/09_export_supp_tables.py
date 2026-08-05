@@ -6,12 +6,12 @@ written as a TSV and, when openpyxl is available, as an XLSX carrying
 human-readable headers plus a data dictionary.
 
 Inputs come from the earlier steps:
-    S1  data/units_metadata.tsv                          (step 00, static)
-    S2  results/consolidated_data_sp.tsv                 (step 03)
-    S3  results/granger/granger_results_by_wave.tsv      (step 05)
-    S4  results/spatial_associations/lisa_<week>.tsv     (step 08)
-    S5  results/lead_time/weekly_zscores.tsv             (step 07)
-    S6  results/lead_time/lead_time_table.tsv            (step 07)
+    S1  data/units_metadata.tsv                          (static input)
+    S2  results/consolidated_data_sp.tsv                 (step 02)
+    S3  results/granger/granger_results_by_wave.tsv      (step 04)
+    S4  results/spatial_associations/lisa_<week>.tsv     (step 07)
+    S5  results/lead_time/weekly_zscores.tsv             (step 06)
+    S6  results/lead_time/lead_time_table.tsv            (step 06)
 
 Outputs
     results/supp_tables/TableS{1..6}.{tsv,xlsx}
@@ -114,13 +114,13 @@ write_table(
 # Consolidated weekly occupancy and laboratory surveillance data
 consolidated = pd.read_csv(CONSOLIDATED_DATA, sep='\t')
 table_s2 = consolidated.rename(columns={
-    'detecta_percentage_mean': 'occupancy_percentage_mean',
-    'radim_posrate_sc2': 'exploratory_private_posrate_sc2',
-    'sivep_cases_sc2': 'validation_public_cases_sc2',
-    'radim_posrate_denv': 'exploratory_private_posrate_denv',
-    'infodengue_cases_denv': 'validation_public_cases_denv',
-    'radim_posrate_vrisp': 'exploratory_private_posrate_vrisp',
-    'sivep_vrisp_cases': 'validation_public_vrisp_cases',
+    'occupancy_percentage_mean': 'occupancy_percentage_mean',
+    'exploratory_posrate_sc2': 'exploratory_private_posrate_sc2',
+    'validation_cases_sc2': 'validation_public_cases_sc2',
+    'exploratory_posrate_denv': 'exploratory_private_posrate_denv',
+    'validation_cases_denv': 'validation_public_cases_denv',
+    'exploratory_posrate_vrisp': 'exploratory_private_posrate_vrisp',
+    'validation_vrisp_cases': 'validation_public_vrisp_cases',
 })
 
 write_table(
@@ -153,12 +153,12 @@ write_table(
 granger = pd.read_csv(GRANGER_DIR / "granger_results_by_wave.tsv", sep="\t")
 
 SERIES_LABELS = {
-    'sivep_cases_sc2_norm': ('validation_cases_sc2_norm', 'SC2'),
-    'radim_posrate_sc2': ('exploratory_posrate_sc2', 'SC2'),
-    'infodengue_diff': ('validation_denv_diff', 'DENV'),
-    'radim_denv_diff': ('exploratory_denv_diff', 'DENV'),
-    'radim_posrate_vrisp': ('exploratory_posrate_vrisp', 'RV'),
-    'sivep_vrisp_cases_norm': ('validation_vrisp_cases_norm', 'RV'),
+    'validation_cases_sc2_norm': ('validation_cases_sc2_norm', 'SC2'),
+    'exploratory_posrate_sc2': ('exploratory_posrate_sc2', 'SC2'),
+    'validation_denv_diff': ('validation_denv_diff', 'DENV'),
+    'exploratory_denv_diff': ('exploratory_denv_diff', 'DENV'),
+    'exploratory_posrate_vrisp': ('exploratory_posrate_vrisp', 'RV'),
+    'validation_vrisp_cases_norm': ('validation_vrisp_cases_norm', 'RV'),
 }
 
 table_s3 = granger[granger['p_value'] < SIGNIFICANCE].copy()
@@ -237,7 +237,7 @@ write_table(
 
 # %%
 # ----------------------------- Table S5 -----------------------------
-# Weekly z-scores and alert flags, produced in step 07
+# Weekly z-scores and alert flags, produced in step 06
 table_s5 = pd.read_csv(LEAD_TIME_DIR / 'weekly_zscores.tsv', sep='\t')
 
 write_table(
@@ -260,7 +260,7 @@ write_table(
 
 # %%
 # ----------------------------- Table S6 -----------------------------
-# Early warning lead time, produced in step 07
+# Early warning lead time, produced in step 06
 table_s6 = pd.read_csv(LEAD_TIME_DIR / 'lead_time_table.tsv', sep='\t')
 
 write_table(

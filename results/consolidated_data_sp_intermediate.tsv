@@ -1,4 +1,4 @@
-epidemiological_weeks	detecta_percentage_mean	radim_posrate_sc2	sivep_cases_sc2	radim_posrate_denv	infodengue_cases_denv	radim_posrate_vrisp	sivep_vrisp_cases	sivep_cases_sc2_norm	infodengue_cases_denv_norm	sivep_vrisp_cases_norm
+epidemiological_weeks	occupancy_percentage_mean	exploratory_posrate_sc2	validation_cases_sc2	exploratory_posrate_denv	validation_cases_denv	exploratory_posrate_vrisp	validation_vrisp_cases	validation_cases_sc2_norm	validation_cases_denv_norm	validation_vrisp_cases_norm
 2023-07-15	45.50704847156254	4.316546762589928	97	3.512396694214876	628	4.45859872611465	252	8.005427408412483	0.11800663197271685	10.823529411764705
 2023-07-22	37.92341284339823	4.267963263101027	88	3.189066059225513	528	3.889318885448916	179	6.7842605156037985	0.0	2.235294117647059
 2023-07-29	41.16997016197784	6.62287903667214	126	3.67965367965368	533	4.629250307251127	196	11.940298507462686	0.005900331598635843	4.235294117647059
