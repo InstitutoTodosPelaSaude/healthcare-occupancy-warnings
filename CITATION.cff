@@ -12,6 +12,9 @@ abstract: >-
   lead time analysis, and LISA spatial association analysis.
 type: dataset
 version: 1.0.0
+license:
+  - MIT
+  - CC-BY-4.0
 repository-code: "https://github.com/InstitutoTodosPelaSaude/healthcare-occupancy-warnings"
 keywords:
   - healthcare occupancy

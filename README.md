@@ -1,5 +1,7 @@
 # Healthcare Occupancy as an Early Warning Signal for Infectious Disease Surges
 
+[![License: MIT](https://img.shields.io/badge/Code-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC-BY-4.0](https://img.shields.io/badge/Data-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
 
 Companion repository for:
@@ -172,7 +174,11 @@ Machine-readable metadata is in `CITATION.cff`.
 
 ## License
 
-To be defined before the repository is made public.
+- **Code** (`scripts/`, `src/`): [MIT License](LICENSE)
+- **Data and results** (`data/`, `results/`): [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
+
+The occupancy values derive from Google Maps and the surveillance series from
+SIVEP-SRAG and InfoDengue; see the provenance note in [`LICENSE`](LICENSE).
 
 ## Ethics
 
