@@ -1,0 +1,19 @@
+wave	display_label	source_type	dataset_role	granger_significant	first_alert_date	n_alert_weeks	lab_peak_date	lab_peak_value	lead_time_weeks	detected_before_peak
+Wave 1	SC2 (%)	private	exploratory	True	2023-08-05	6	2023-10-21	30.9682	11.0	True
+Wave 1	SC2 (#)	public	validation	True	2023-08-05	6	2023-10-28	673.0	12.0	True
+Wave 1	Denv (%)	private	exploratory	True	2023-08-05	6	2023-08-05	3.617	0.0	False
+Wave 1	Denv (#)	public	validation	True	2023-08-05	6	2023-10-07	850.0	9.0	True
+Wave 1	RV (%)	private	exploratory	True	2023-08-05	6	2023-10-28	15.9843	12.0	True
+Wave 1	RV (#)	public	validation	True	2023-08-05	6	2023-10-28	791.0	12.0	True
+Wave 2	SC2 (%)	private	exploratory	False	2023-12-16	9	2024-02-17	32.905	9.0	True
+Wave 2	SC2 (#)	public	validation	False	2023-12-16	9	2023-10-28	673.0	-7.0	False
+Wave 2	Denv (%)	private	exploratory	True	2023-12-16	9	2024-05-18	40.9238	22.0	True
+Wave 2	Denv (#)	public	validation	True	2023-12-16	9	2024-05-18	79627.0	22.0	True
+Wave 2	RV (%)	private	exploratory	False	2023-12-16	9	2024-02-17	18.6868	9.0	True
+Wave 2	RV (#)	public	validation	False	2023-12-16	9	2024-04-20	1010.0	18.0	True
+Wave 3	SC2 (%)	private	exploratory	True	2024-07-06	4	2024-08-24	23.6289	7.0	True
+Wave 3	SC2 (#)	public	validation	True	2024-07-06	4	2024-08-31	435.0	8.0	True
+Wave 3	Denv (%)	private	exploratory	False	2024-07-06	4	2024-06-01	39.1116	-5.0	False
+Wave 3	Denv (#)	public	validation	False	2024-07-06	4	2024-06-01	39204.0	-5.0	False
+Wave 3	RV (%)	private	exploratory	True	2024-07-06	4	2024-09-07	11.9774	9.0	True
+Wave 3	RV (#)	public	validation	True	2024-07-06	4	2024-08-31	637.0	8.0	True

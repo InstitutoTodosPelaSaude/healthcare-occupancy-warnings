@@ -1,0 +1,17 @@
+shift_period	timeseries1	timeseries2	lag	p-value	virus
+shift1	validation_denv_diff	occupancy_diff	4	0.0	DENV
+shift1	validation_vrisp_cases_norm	occupancy_diff	3	0.0	RV
+shift1	validation_cases_sc2_norm	occupancy_diff	3	0.01	SC2
+shift1	validation_cases_sc2_norm	occupancy_diff	4	0.01	SC2
+shift1	validation_vrisp_cases_norm	occupancy_diff	4	0.02	RV
+shift1	validation_vrisp_cases_norm	occupancy_diff	2	0.02	RV
+shift1	exploratory_posrate_vrisp	occupancy_diff	3	0.02	RV
+shift1	validation_denv_diff	occupancy_diff	5	0.02	DENV
+shift1	exploratory_posrate_vrisp	occupancy_diff	4	0.05	RV
+shift2	exploratory_denv_diff	occupancy_diff	2	0.0	DENV
+shift2	exploratory_denv_diff	occupancy_diff	1	0.0	DENV
+shift2	exploratory_denv_diff	occupancy_diff	3	0.0	DENV
+shift2	exploratory_denv_diff	occupancy_diff	4	0.0	DENV
+shift2	exploratory_denv_diff	occupancy_diff	5	0.0	DENV
+shift3	validation_vrisp_cases_norm	occupancy_diff	1	0.03	RV
+shift3	validation_cases_sc2_norm	occupancy_diff	1	0.04	SC2
