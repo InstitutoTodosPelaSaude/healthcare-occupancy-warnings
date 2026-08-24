@@ -69,7 +69,8 @@ coverage and checksums.
 
 Occupancy percentages for 17 public urgent care units across seven municipalities
 in the São Paulo metropolitan area, queried hourly from Google Maps between
-15 July 2023 and 12 October 2024. Google derives these values from aggregated,
+5 July 2023 and 8 October 2024. The analyses cover the epidemiological weeks from
+15 July 2023 to 12 October 2024. Google derives these values from aggregated,
 anonymised location history and expresses them as a percentage of each location's
 typical peak popularity. No individual-level information is accessed or stored.
 

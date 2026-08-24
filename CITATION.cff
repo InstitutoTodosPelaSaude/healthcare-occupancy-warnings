@@ -4,10 +4,12 @@ title: "Healthcare occupancy data as an early warning indicator of infectious di
 abstract: >-
   Companion repository for the manuscript on healthcare occupancy as an early
   warning signal for infectious disease surges. Contains hourly occupancy data
-  for 17 public urgent care units in the São Paulo metropolitan area
-  (15 July 2023 to 12 October 2024), weekly laboratory surveillance series for
-  SARS-CoV-2, dengue and respiratory viruses, and the Python pipeline that
-  reproduces every figure and supplementary table: dynamic time warping,
+  for 17 public urgent care units in the São Paulo metropolitan area, collected from 5 July 2023 to
+  8 October 2024 and analysed over the epidemiological weeks from 15 July 2023 to
+  12 October 2024, weekly laboratory surveillance series for
+  SARS-CoV-2, dengue and respiratory viruses, and the Python pipeline behind the
+  supplementary data files and the source series for the manuscript figures:
+  dynamic time warping,
   Granger causality testing, a z-based epidemic volatility index, early warning
   lead time analysis, and LISA spatial association analysis.
 type: dataset
