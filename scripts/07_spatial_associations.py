@@ -7,7 +7,7 @@ weekly occupancy for the outbreak and non-outbreak weeks, using a k-nearest
 neighbours spatial weights matrix with k = 4 (Figure S1 and the map panels
 of Figure 4).
 
-This is the source of Table S4.
+This is the source of Supplementary Data 4.
 
 Outputs
     results/spatial_associations/distance_matrix.tsv

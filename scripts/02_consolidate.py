@@ -6,7 +6,7 @@ alongside exploratory (private laboratory positivity rates, ITpS network) and
 validation (SIVEP-SRAG and InfoDengue case counts) indicators for SARS-CoV-2,
 dengue and the respiratory virus panel.
 
-This is the source of Table S2.
+This is the source of Supplementary Data 2.
 
 Outputs
     results/consolidated_data_sp.tsv

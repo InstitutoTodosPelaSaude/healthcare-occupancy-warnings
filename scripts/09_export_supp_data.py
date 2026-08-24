@@ -1,20 +1,20 @@
 # %%
-"""Step 10: assemble Supplementary Tables S1-S6.
+"""Step 09: assemble Supplementary Data 1-7.
 
-These tables are the source data declared for Figures 1-5 and S1-S2. Each is
+These files are the source data declared for Figures 1-5 and S1-S2. Each is
 written as a TSV and, when openpyxl is available, as an XLSX carrying
 human-readable headers plus a data dictionary.
 
 Inputs come from the earlier steps:
-    S1  data/units_metadata.tsv                          (static input)
-    S2  results/consolidated_data_sp.tsv                 (step 02)
-    S3  results/granger/granger_results_by_wave.tsv      (step 04)
-    S4  results/spatial_associations/lisa_<week>.tsv     (step 07)
-    S5  results/lead_time/weekly_zscores.tsv             (step 06)
-    S6  results/lead_time/lead_time_table.tsv            (step 06)
+    1   data/units_metadata.tsv                          (static input)
+    2   results/consolidated_data_sp.tsv                 (step 02)
+    3   results/granger/granger_results_by_wave.tsv      (step 04)
+    4   results/spatial_associations/lisa_<week>.tsv     (step 07)
+    5   results/lead_time/weekly_zscores.tsv             (step 06)
+    6   results/lead_time/lead_time_table.tsv            (step 06)
 
 Outputs
-    results/supp_tables/TableS{1..6}.{tsv,xlsx}
+    results/supp_data/Supplementary Data {1..7}.{tsv,xlsx}
 """
 
 import sys
@@ -71,7 +71,7 @@ def write_table(df, name, readable_headers=None, dictionary=None):
 
 
 # %%
-# ----------------------------- Table S1 -----------------------------
+# ----------------------------- Supplementary Data 1 -----------------------------
 # Healthcare unit metadata
 metadata = pd.read_csv(UNITS_METADATA, sep='\t')
 metadata["unit_name"] = metadata["name"].map(units.NAME_MAPPING)
@@ -94,7 +94,7 @@ write_table(
         'city': 'Municipality', 'state': 'State', 'cep': 'Postal code',
     },
     dictionary={
-        'unit_index': 'Stable identifier used across Tables S1 and S4.',
+        'unit_index': 'Stable identifier used across Supplementary Data 1 and 4.',
         'unit_name': 'Standardised unit name used in the manuscript figures.',
         'lat': 'Latitude in decimal degrees (EPSG:4326).',
         'lon': 'Longitude in decimal degrees (EPSG:4326).',
@@ -111,7 +111,7 @@ write_table(
 )
 
 # %%
-# ----------------------------- Table S2 -----------------------------
+# ----------------------------- Supplementary Data 2 -----------------------------
 # Consolidated weekly occupancy and laboratory surveillance data
 consolidated = pd.read_csv(CONSOLIDATED_DATA, sep='\t')
 table_s2 = consolidated.rename(columns={
@@ -149,7 +149,7 @@ write_table(
 )
 
 # %%
-# ----------------------------- Table S3 -----------------------------
+# ----------------------------- Supplementary Data 3 -----------------------------
 # Granger causality results, significant lags only
 granger = pd.read_csv(GRANGER_DIR / "granger_results_by_wave.tsv", sep="\t")
 
@@ -185,14 +185,14 @@ write_table(
         'shift_period': 'Overlapping epidemic window accounting for pathogen-specific lags.',
         'timeseries1': 'Laboratory surveillance series tested as the target.',
         'timeseries2': 'First-differenced mean occupancy series used as the predictor.',
-        'lag': 'Number of weeks by which the laboratory signal precedes occupancy changes.',
+        'lag': 'Number of weeks by which the occupancy signal precedes the laboratory series.',
         'p-value': 'Granger causality p-value (ssr F-test), rounded to two decimals.',
         'virus': 'Pathogen group: SC2, DENV or RV.',
     },
 )
 
 # %%
-# ----------------------------- Table S4 -----------------------------
+# ----------------------------- Supplementary Data 4 -----------------------------
 # LISA results for both representative weeks
 lisa_frames = []
 for week in (units.OUTBREAK_WEEK, units.NON_OUTBREAK_WEEK):
@@ -222,7 +222,7 @@ write_table(
         'color': 'Plot colour', 'period_week': 'Epidemiological week',
     },
     dictionary={
-        'unit_index': 'Stable identifier, matching Table S1.',
+        'unit_index': 'Stable identifier, matching Supplementary Data 1.',
         'unit_name': 'Standardised unit name.',
         'lat': 'Latitude in decimal degrees (EPSG:4326).',
         'lon': 'Longitude in decimal degrees (EPSG:4326).',
@@ -237,7 +237,7 @@ write_table(
 )
 
 # %%
-# ----------------------------- Table S5 -----------------------------
+# ----------------------------- Supplementary Data 5 -----------------------------
 # Weekly z-scores and alert flags, produced in step 06
 table_s5 = pd.read_csv(LEAD_TIME_DIR / 'weekly_zscores.tsv', sep='\t')
 
@@ -260,7 +260,7 @@ write_table(
 )
 
 # %%
-# ----------------------------- Table S6 -----------------------------
+# ----------------------------- Supplementary Data 6 -----------------------------
 # Early warning lead time, produced in step 06
 table_s6 = pd.read_csv(LEAD_TIME_DIR / 'lead_time_table.tsv', sep='\t')
 

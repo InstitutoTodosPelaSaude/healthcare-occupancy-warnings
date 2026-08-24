@@ -76,7 +76,7 @@ LEAD_TIME_WAVES = {
 }
 
 # Maps each Granger test target back to its pathogen group, so the
-# significance flags in Table S6 can be derived from the step 04 output
+# significance flags in Supplementary Data 6 can be derived from the step 04 output
 # instead of being transcribed by hand.
 GRANGER_TARGET_TO_GROUP = {
     'validation_cases_sc2_norm': 'SC2',
@@ -109,7 +109,7 @@ NAME_MAPPING = {
     "UPA Vila Assis": "UPA Vila Assis",
 }
 
-# Stable unit numbering used across Tables S1 and S4.
+# Stable unit numbering used across Supplementary Data 1 and 4.
 UNIT_INDEX = {
     "UPA Vicente Missiano": 1,
     "UPA Vergueiro": 2,

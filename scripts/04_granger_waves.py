@@ -2,11 +2,11 @@
 """Step 05: stationarity testing and Granger causality across epidemic waves.
 
 Runs the Augmented Dickey-Fuller test on every series, applies first-order
-differencing where it is needed, then tests whether each laboratory indicator
-Granger-causes the change in mean occupancy, separately within three
+differencing where it is needed, then tests whether the change in mean
+occupancy Granger-causes each laboratory indicator, separately within three
 partially overlapping wave windows.
 
-This is the source of Table S3.
+This is the source of Supplementary Data 3.
 
 Outputs
     results/granger/adf_stationarity.tsv

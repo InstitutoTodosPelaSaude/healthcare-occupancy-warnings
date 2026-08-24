@@ -1,5 +1,5 @@
 # %%
-"""Step 07: early warning performance and lead time (Figure 5, Tables S5-S6).
+"""Step 07: early warning performance and lead time (Figure 5, Supplementary Data 5-6).
 
 For each epidemic wave, locates the first occupancy alert (weekly z-score
 above 0.65 on a 6-week rolling baseline) and the laboratory surge peak, then
@@ -9,8 +9,8 @@ the significance flags are read from the step 04 output rather than
 hard-coded.
 
 Outputs
-    results/lead_time/weekly_zscores.tsv     (source of Table S5)
-    results/lead_time/lead_time_table.tsv    (source of Table S6)
+    results/lead_time/weekly_zscores.tsv     (source of Supplementary Data 5)
+    results/lead_time/lead_time_table.tsv    (source of Supplementary Data 6)
     results/lead_time/plots/figure5.{png,svg}
 """
 
@@ -104,7 +104,7 @@ df_occ['z_occupancy'] = (
 df_occ['alert_fired'] = (df_occ['z_occupancy'] > THRESHOLD).astype(int)
 
 # %%
-# ------------- Weekly z-scores for every series (Table S5) -------------
+# ------------- Weekly z-scores for every series (Supplementary Data 5) -------------
 zscore_out = df_occ[['epidemiological_weeks', 'occupancy_percentage_mean',
                      'occ_rolling_mean', 'occ_rolling_std',
                      'z_occupancy', 'alert_fired']].copy()

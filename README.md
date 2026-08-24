@@ -15,7 +15,7 @@ Companion repository for:
 ## Key Findings
 
 - **Occupancy anticipates laboratory-confirmed surges by up to five weeks.** Granger causality identified significant directional associations at lags of 1 to 5 weeks across three epidemic waves.
-- **The alert system caught every wave from its onset.** A weekly z-score above 0.65 on a six-week rolling baseline fired before the laboratory surge peak for 11 of the 12 Granger-significant pathogen-source combinations, reaching 22 weeks of lead time in wave 2. The exception is dengue positivity in wave 1, which peaked in the same week as the first alert. Per-combination lead times are in Table S6.
+- **The alert system caught every wave from its onset.** A weekly z-score above 0.65 on a six-week rolling baseline fired before the laboratory surge peak for 11 of the 12 Granger-significant pathogen-source combinations, reaching 22 weeks of lead time in wave 2. The exception is dengue positivity in wave 1, which peaked in the same week as the first alert. Per-combination lead times are in Supplementary Data 6.
 - **Alignment is pathogen-dependent.** Dynamic time warping distances were lowest for SARS-CoV-2 (0.89 positivity, 1.00 case counts) and the respiratory panel (0.97, 1.01), and clearly higher for dengue (1.91, 2.12) — occupancy tracks respiratory surges more closely than arboviral ones.
 - **Spatial pressure concentrates as a surge matures.** LISA found 2 of 17 units with significant local clustering in the early outbreak week and 7 of 17 in the later week, identifying a persistent hotspot cluster.
 - **The signal is privacy-safe.** Occupancy comes from aggregated, anonymised Google Maps data. No individual-level record is used anywhere in this pipeline.
@@ -28,7 +28,7 @@ Companion repository for:
 ├── data/
 │   ├── DATA_DICTIONARY.md                     # Source, coverage and columns for every input
 │   ├── occupancy/                             # Hourly occupancy, one TSV per unit (17 units)
-│   ├── units_metadata.tsv                     # Unit coordinates and attributes → Table S1
+│   ├── units_metadata.tsv                     # Unit coordinates and attributes → Supplementary Data 1
 │   ├── private_labs/                          # Weekly positivity rates, ITpS network (exploratory)
 │   │   ├── respat_posrate_SP_state.tsv
 │   │   ├── arbo_posrate_SP_state.tsv
@@ -46,13 +46,13 @@ Companion repository for:
 │   └── paths.py                               # Repository paths, anchored on __file__
 ├── scripts/                                   # The numbered pipeline, 01 through 09
 ├── results/
-│   ├── consolidated_data_sp.tsv               # Weekly panel → Table S2
+│   ├── consolidated_data_sp.tsv               # Weekly panel → Supplementary Data 2
 │   ├── unit_overview/                         # Occupancy series and heatmap → Figure 2A
 │   ├── dtw/                                   # Warping paths and distances → Figure 3
-│   ├── granger/                               # ADF and Granger results → Table S3
-│   ├── outbreaks/                             # Volatility index and status maps → Figure 4A-C, E-F
-│   ├── lead_time/                             # Alert weeks and lead times → Figure 5, Tables S5-S6
-│   ├── spatial_associations/                  # Distance matrix and LISA → Figures S1, S2, Table S4
+│   ├── granger/                               # ADF and Granger results → Supplementary Data 3
+│   ├── outbreaks/                             # Volatility index and status maps → Figure 4A, 4B, 4E
+│   ├── lead_time/                             # Alert weeks and lead times → Figure 5, Supplementary Data 5-6
+│   ├── spatial_associations/                  # Distance matrix and LISA → Figures S1, S2, Supplementary Data 4
 │   ├── maps/                                  # Unit locator map → Figure 1A
 │   └── supp_data/                             # Supplementary Data 1-7 (TSV and XLSX)
 ├── CITATION.cff
@@ -119,17 +119,22 @@ in an interactive window.
 | Script | Purpose | Output |
 |---|---|---|
 | `01` | Occupancy panel: hourly → daily → weekly, moving averages, clustered heatmap | Figure 2A |
-| `02` | Join occupancy with every laboratory indicator | Table S2 |
+| `02` | Join occupancy with every laboratory indicator | Supplementary Data 2 |
 | `03` | Dynamic time warping against each indicator | Figure 3 |
-| `04` | ADF stationarity and Granger causality by wave | Table S3 |
-| `05` | Z-based epidemic volatility index, per-unit barplots and status maps | Figure 4A-C, E-F |
-| `06` | Alert weeks, laboratory peaks and lead times | Figure 5, Tables S5-S6 |
-| `07` | Haversine distance matrix and LISA spatial clustering | Figures S1, S2, Table S4 |
+| `04` | ADF stationarity and Granger causality by wave | Supplementary Data 3 |
+| `05` | Z-based epidemic volatility index, per-unit barplots and status maps | Figure 4A, 4B, 4E |
+| `06` | Alert weeks, laboratory peaks and lead times | Figure 5, Supplementary Data 5-6 |
+| `07` | Haversine distance matrix and LISA spatial clustering | Figures S1, S2, Supplementary Data 4 |
 | `08` | Locator map of the 17 units | Figure 1A |
 | `09` | Assemble Supplementary Data 1-7 (TSV and XLSX) | Supplementary Data 1-7 |
 
-Final manuscript figures were composed from these outputs; panels 1B and 1C are
-schematics.
+Final manuscript figures were composed from these outputs. Some elements were
+added at composition time and are not produced by any script: panels 1B and 1C
+are schematics; the surge shading and the lower average-occupancy panel of
+Figure 2A; the line plots in Figures 2B and 2C (their underlying series is
+`results/consolidated_data_sp.tsv`); and the absolute-occupancy panels 4C and 4F
+(their values are in `results/supp_data/Supplementary Data 4.tsv`). Unit numbers
+shown in the figures correspond to the unit index in Supplementary Data 1.
 
 **Requirements:** Python >= 3.12, packages pinned in `requirements.txt`. If the
 `dtaidistance` wheel ships without its compiled backend on your platform:
@@ -140,7 +145,7 @@ schematics.
 Every numeric output is deterministic and reproduces the published values, with
 one exception. LISA p-values come from conditional randomisation;
 `07_spatial_associations.py` fixes the random seed so the step is repeatable, but
-the p-values published in Table S4 came from an unseeded run and differ in the
+the p-values published in Supplementary Data 4 came from an unseeded run and differ in the
 third decimal. Cluster assignments, significance calls and every other column are
 unaffected.
 
