@@ -6,7 +6,7 @@
 
 Companion repository for:
 
-> **Araújo JD†, Santos e Silva JC†**, Bragatte MAS, Sousa ER, Schrarstzhaupt IN, Sabino EC, Nakaya HI, Lázari CS, Pinho JRR, Penna GO, Kalil J, Simão M, Brito AF, Sampaio V. Healthcare occupancy data as an early warning indicator of infectious disease surges in the São Paulo metropolitan area, Brazil. *Communications Medicine* (under review).
+> **Araújo JD†, Santos e Silva JC†**, Bragatte MAS, Sousa ER, Schrarstzhaupt IN, Sabino EC, Nakaya HI, Lázari CS, Pinho JRR, Penna GO, Kalil J, Simão M, Brito AF, Sampaio V. Healthcare occupancy data as an early warning indicator of infectious disease surges in São Paulo. *Communications Medicine* (under review).
 >
 > † These authors contributed equally to this work.
 
@@ -54,7 +54,7 @@ Companion repository for:
 │   ├── lead_time/                             # Alert weeks and lead times → Figure 5, Tables S5-S6
 │   ├── spatial_associations/                  # Distance matrix and LISA → Figures S1, S2, Table S4
 │   ├── maps/                                  # Unit locator map → Figure 1A
-│   └── supp_tables/                           # Supplementary Data 1-7 (TSV and XLSX)
+│   └── supp_data/                             # Supplementary Data 1-7 (TSV and XLSX)
 ├── CITATION.cff
 ├── requirements.txt
 └── LICENSE
@@ -154,16 +154,15 @@ If you use this code or data, please cite:
 
 ```bibtex
 @article{araujo2026healthcare,
-  author  = {Ara\'ujo, Jose Deney and Santos e Silva, Juan Carlo and
+  author  = {Araújo, Jose Deney and Santos e Silva, Juan Carlo and
              Bragatte, Marcelo A. S. and Sousa, Erick Rodrigues and
              Schrarstzhaupt, Isaac N. and Sabino, Ester C. and
-             Nakaya, Helder I. and L\'azari, Carolina dos Santos and
-             Pinho, Jo\~ao Renato Rebello and Penna, Gerson Oliveira and
-             Kalil, Jorge and Sim\~ao, Mariangela and
+             Nakaya, Helder I. and Lázari, Carolina dos Santos and
+             Pinho, João Renato Rebello and Penna, Gerson Oliveira and
+             Kalil, Jorge and Simão, Mariangela and
              Brito, Anderson Fernandes and Sampaio, Vanderson},
   title   = {Healthcare occupancy data as an early warning indicator of
-             infectious disease surges in the {S\~ao Paulo} metropolitan area,
-             {Brazil}},
+             infectious disease surges in {São Paulo}},
   journal = {Communications Medicine},
   year    = {2026},
   note    = {Under review}

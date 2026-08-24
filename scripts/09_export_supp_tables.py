@@ -30,13 +30,13 @@ from src.paths import (
     GRANGER_DIR,
     LEAD_TIME_DIR,
     SPATIAL_DIR,
-    SUPP_TABLES_DIR,
+    SUPP_DATA_DIR,
     UNITS_METADATA,
     UNIT_OVERVIEW_DIR,
     ensure_dir,
 )
 
-ensure_dir(SUPP_TABLES_DIR)
+ensure_dir(SUPP_DATA_DIR)
 
 SIGNIFICANCE = 0.05
 # Decimal places used in the submitted supplementary tables
@@ -52,7 +52,7 @@ except ImportError:
 
 def write_table(df, name, readable_headers=None, dictionary=None):
     """Write one supplementary table as TSV and, if possible, as XLSX."""
-    tsv_path = SUPP_TABLES_DIR / f"{name}.tsv"
+    tsv_path = SUPP_DATA_DIR / f"{name}.tsv"
     df.to_csv(tsv_path, sep="\t", index=False)
 
     if not XLSX_AVAILABLE:
@@ -60,7 +60,7 @@ def write_table(df, name, readable_headers=None, dictionary=None):
 
     export = df.rename(columns=readable_headers) if readable_headers else df.copy()
 
-    with pd.ExcelWriter(SUPP_TABLES_DIR / f"{name}.xlsx", engine="openpyxl") as writer:
+    with pd.ExcelWriter(SUPP_DATA_DIR / f"{name}.xlsx", engine="openpyxl") as writer:
         export.to_excel(writer, sheet_name=name, index=False)
         if dictionary:
             pd.DataFrame(

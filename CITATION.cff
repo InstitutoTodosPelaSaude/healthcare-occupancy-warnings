@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite it as below."
-title: "Healthcare occupancy data as an early warning indicator of infectious disease surges in the São Paulo metropolitan area, Brazil"
+title: "Healthcare occupancy data as an early warning indicator of infectious disease surges in São Paulo"
 abstract: >-
   Companion repository for the manuscript on healthcare occupancy as an early
   warning signal for infectious disease surges. Contains hourly occupancy data

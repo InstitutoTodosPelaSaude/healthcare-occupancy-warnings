@@ -25,7 +25,7 @@ OUTBREAKS_DIR = RESULTS_DIR / "outbreaks"
 SPATIAL_DIR = RESULTS_DIR / "spatial_associations"
 MAPS_DIR = RESULTS_DIR / "maps"
 LEAD_TIME_DIR = RESULTS_DIR / "lead_time"
-SUPP_TABLES_DIR = RESULTS_DIR / "supp_tables"
+SUPP_DATA_DIR = RESULTS_DIR / "supp_data"
 
 CONSOLIDATED_DATA = RESULTS_DIR / "consolidated_data_sp.tsv"
 CONSOLIDATED_DATA_INTERMEDIATE = RESULTS_DIR / "consolidated_data_sp_intermediate.tsv"
