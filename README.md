@@ -184,6 +184,10 @@ Machine-readable metadata is in `CITATION.cff`.
 The occupancy values derive from Google Maps and the surveillance series from
 SIVEP-SRAG and InfoDengue; see the provenance note in [`LICENSE`](LICENSE).
 
+## Contact
+
+Corresponding author and lead contact: Vanderson Sampaio (vandersons@gmail.com).
+
 ## Ethics
 
 All public datasets used here come from repositories that carry no individually
