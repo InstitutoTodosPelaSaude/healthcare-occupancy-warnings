@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/Code-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: CC-BY-4.0](https://img.shields.io/badge/Data-CC--BY--4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22086238.svg)](https://doi.org/10.5281/zenodo.22086238)
 
 Companion repository for:
 
@@ -175,7 +176,10 @@ If you use this code or data, please cite:
 }
 ```
 
-Machine-readable metadata is in `CITATION.cff`.
+Each release is archived on Zenodo. The concept DOI
+[10.5281/zenodo.22086238](https://doi.org/10.5281/zenodo.22086238) always resolves to
+the latest version; cite the version DOI shown on the Zenodo record to reference a
+specific release. Machine-readable metadata is in `CITATION.cff`.
 
 ## License
 
