@@ -32,6 +32,7 @@ from src.paths import (
     SPATIAL_DIR,
     SUPP_TABLES_DIR,
     UNITS_METADATA,
+    UNIT_OVERVIEW_DIR,
     ensure_dir,
 )
 
@@ -83,7 +84,7 @@ metadata = metadata[
 table_s1 = metadata.sort_values(by="unit_index")
 
 write_table(
-    table_s1, "TableS1",
+    table_s1, "Supplementary Data 1",
     readable_headers={
         'unit_index': 'Unit index', 'unit_name': 'Unit name',
         'lat': 'Latitude', 'lon': 'Longitude',
@@ -124,7 +125,7 @@ table_s2 = consolidated.rename(columns={
 })
 
 write_table(
-    table_s2, "TableS2",
+    table_s2, "Supplementary Data 2",
     readable_headers={
         'epidemiological_weeks': 'Epidemiological week (ending Saturday)',
         'occupancy_percentage_mean': 'Mean Occupancy (%)',
@@ -174,7 +175,7 @@ table_s3 = table_s3[
 table_s3['lag'] = table_s3['lag'].astype(int)
 
 write_table(
-    table_s3, "TableS3",
+    table_s3, "Supplementary Data 3",
     readable_headers={
         'shift_period': 'Shifted epidemic period', 'timeseries1': 'Laboratory series',
         'timeseries2': 'Occupancy series', 'lag': 'Lag (weeks)',
@@ -212,7 +213,7 @@ table_s4 = table_s4.sort_values(by=['period_week', 'unit_index'])
 table_s4['occupancy'] = table_s4['occupancy'].round(ROUND_DP)
 
 write_table(
-    table_s4, "TableS4",
+    table_s4, "Supplementary Data 4",
     readable_headers={
         'unit_index': 'Unit index', 'unit_name': 'Unit name',
         'lat': 'Latitude', 'lon': 'Longitude', 'occupancy': 'Occupancy (%)',
@@ -241,7 +242,7 @@ write_table(
 table_s5 = pd.read_csv(LEAD_TIME_DIR / 'weekly_zscores.tsv', sep='\t')
 
 write_table(
-    table_s5, "TableS5",
+    table_s5, "Supplementary Data 5",
     readable_headers={
         'epi_week': 'Epidemiological week', 'occupancy_%': 'Occupancy (%)',
         'occupancy_rolling_mean': 'Occupancy 6-week rolling mean',
@@ -264,7 +265,7 @@ write_table(
 table_s6 = pd.read_csv(LEAD_TIME_DIR / 'lead_time_table.tsv', sep='\t')
 
 write_table(
-    table_s6, "TableS6",
+    table_s6, "Supplementary Data 6",
     readable_headers={
         'wave': 'Wave', 'display_label': 'Indicator', 'source_type': 'Source type',
         'dataset_role': 'Dataset role', 'granger_significant': 'Granger significant',
@@ -288,7 +289,46 @@ write_table(
 )
 
 # %%
-for name, table in (("TableS1", table_s1), ("TableS2", table_s2),
-                    ("TableS3", table_s3), ("TableS4", table_s4),
-                    ("TableS5", table_s5), ("TableS6", table_s6)):
+# ----------------------------- Supplementary Data 7 -----------------------------
+# Weekly occupancy by unit: the matrix behind the Figure 2A heatmap.
+# Only the measured occupancy is provided; the moving averages and z-scores
+# derived from it are reproduced by the pipeline.
+by_unit = pd.read_csv(
+    UNIT_OVERVIEW_DIR / 'by_unit' / 'weekly_percentage_by_unit.tsv',
+    sep='\t', index_col=0,
+)
+# Columns carry the raw establishment names; relabel them with the unit index
+# used in Supplementary Data 1 and order them 1 to 17.
+by_unit.columns = [
+    units.UNIT_INDEX[units.NAME_MAPPING[c]] for c in by_unit.columns
+]
+by_unit = by_unit[sorted(by_unit.columns)]
+by_unit.columns = [str(c) for c in by_unit.columns]
+
+table_s7 = by_unit.reset_index()
+table_s7 = table_s7.rename(columns={table_s7.columns[0]: 'epi_week'})
+table_s7['epi_week'] = pd.to_datetime(table_s7['epi_week']).dt.strftime('%Y-%m-%d')
+table_s7[table_s7.columns[1:]] = table_s7[table_s7.columns[1:]].round(4)
+
+write_table(
+    table_s7, "Supplementary Data 7",
+    readable_headers=dict(
+        {'epi_week': 'Epidemiological week'},
+        **{str(i): f'Unit {i} (%)' for i in range(1, 18)},
+    ),
+    dictionary=dict(
+        {'epi_week': 'Saturday closing each epidemiological week.'},
+        **{str(i): f'Mean weekly occupancy for unit {i}. Unit indices match '
+                   f'Supplementary Data 1.' for i in range(1, 18)},
+    ),
+)
+
+# %%
+for name, table in (("Supplementary Data 1", table_s1),
+                    ("Supplementary Data 2", table_s2),
+                    ("Supplementary Data 3", table_s3),
+                    ("Supplementary Data 4", table_s4),
+                    ("Supplementary Data 5", table_s5),
+                    ("Supplementary Data 6", table_s6),
+                    ("Supplementary Data 7", table_s7)):
     print(f"{name}: {table.shape[0]} rows x {table.shape[1]} columns")

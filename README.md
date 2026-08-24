@@ -54,7 +54,7 @@ Companion repository for:
 │   ├── lead_time/                             # Alert weeks and lead times → Figure 5, Tables S5-S6
 │   ├── spatial_associations/                  # Distance matrix and LISA → Figures S1, S2, Table S4
 │   ├── maps/                                  # Unit locator map → Figure 1A
-│   └── supp_tables/                           # Tables S1-S6 (TSV and XLSX)
+│   └── supp_tables/                           # Supplementary Data 1-7 (TSV and XLSX)
 ├── CITATION.cff
 ├── requirements.txt
 └── LICENSE
@@ -126,7 +126,7 @@ in an interactive window.
 | `06` | Alert weeks, laboratory peaks and lead times | Figure 5, Tables S5-S6 |
 | `07` | Haversine distance matrix and LISA spatial clustering | Figures S1, S2, Table S4 |
 | `08` | Locator map of the 17 units | Figure 1A |
-| `09` | Assemble Supplementary Tables S1-S6 (TSV and XLSX) | Tables S1-S6 |
+| `09` | Assemble Supplementary Data 1-7 (TSV and XLSX) | Supplementary Data 1-7 |
 
 Final manuscript figures were composed from these outputs; panels 1B and 1C are
 schematics.
